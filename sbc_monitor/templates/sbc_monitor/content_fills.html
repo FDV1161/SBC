@@ -1,0 +1,71 @@
+{% extends 'sbc_monitor/base.html' %}
+
+{% block client_list %}
+  {% for client_l in client_list %}
+    {% if client_l.id == client.id %}
+      <a href="{{client_l.id}}" class="p-2 text-dark bg-info">{{ client_l.name }}</a>
+    {% else %}
+      <a href="{{client_l.id}}" class="p-2 text-dark">{{ client_l.name }}</a>
+    {% endif %}
+    
+  {% endfor %}
+{% endblock %}
+
+{% block content %} 
+  
+  {% if client %}
+  
+  {% if status.real_address %}    
+      <h4>{{client.name}} <span class="badge badge-success float-right">Включен</span></h4>          
+    {% else %}
+      <h4>{{client.name}} <span class="badge badge-danger float-right">Выключен</span></h4>
+  {% endif %}
+  
+  
+  
+  <div class="jumbotron p-3">
+    <h5 style="color:#6c757d;">Описание</h5>
+    <p>
+      {% if client.description %}
+        {{client.description}}        
+        <button type="button" class="btn btn-link float-right" data-toggle="modal" data-target="#exampleModal">Редактировать</button>
+        {% include 'sbc_monitor/modal.html'%}
+      {% else %}
+        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Добавить описание</button>        
+        {% include 'sbc_monitor/modal.html'%}
+      {% endif %}  
+    </p>
+  </div>    
+  
+  {% comment %} <h5 style="color:#6c757d;">Текущее состояние</h5>   {% endcomment %}
+  {% comment %} <h5>Текущее состояние: <span class="badge badge-danger">Выключен</span></h5>
+  <h5>Текущее состояние: <span class="badge badge-success">Включен</span></h5> {% endcomment %}
+  
+  
+  <div class="table-responsive">
+  <table class="table table-bordered table-hover ">
+    <caption style="caption-side: top;"><h5>Журнал подключений<h5></caption>
+    <thead class="thead-light">
+      <tr>
+        <th class="text-center">Дата подключения</th>
+        <th class="text-center">Дата выдачи адреса</th>
+        <th class="text-center">Реальный адрес</th>
+        <th class="text-center">Виртуальный адрес</th>
+        <th class="text-center">Обновлено</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for log in log_client %}
+      <tr>
+        <td class="text-center"> {{ log.connected_since|date:"d.m.Y H:i:s" }}</td>
+        <td class="text-center"> {{ log.last_ref|date:"d.m.Y H:i:s" }} </td>
+        <td class="text-center"> {{ log.real_address }} </td>
+        <td class="text-center"> {{ log.virtual_address }} </td>
+        <td class="text-center"> {{ log.updated|date:"d.m.Y H:i:s" }} </td>
+      </tr>          
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+{% endif %}
+{% endblock %}

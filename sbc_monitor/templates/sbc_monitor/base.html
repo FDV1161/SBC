@@ -1,0 +1,72 @@
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% bootstrap_css %}    
+    {% bootstrap_jquery %}
+    {% bootstrap_javascript %}
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body">
+    <div class="container-fluid h-100">
+        <div class="row">
+            <nav class="col navbar navbar-light bg-light">
+                <a class="navbar-brand" href="{% url 'sbc_monitor:test' %}">SBC Monitor</a>
+                <button class="btn btn-link navbar-toggler d-lg-none collapsed" type="button" data-toggle="collapse"
+                    data-target="#collapseOne" aria-controls="collapseOne" aria-expanded="false"
+                    aria-label="Toggle docs navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </nav>
+        </div>
+
+
+
+        <div class="row flex-x1-nowrap navbar-expand-lg h-100">
+
+            <div class=" col-lg-2 col-xl-2 navbar-collapse collapse bg-light p-0 align-items-stretch"
+                style="overflow: auto;" id="collapseOne">
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col col-12 list-group p-0">
+                        {% comment %} list-group-item-action {% endcomment %}
+                        {% comment %} <a href="#" class="p-2 ">Flex itasdasdem 1</a> {% endcomment %}
+                            {% block client_list %}
+                            {% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col col-lg-10 col-xl-10 mt-2"> 
+                {% block content %}
+                {% endblock %}                
+            </div>
+        </div>
+    </div>
+    </body>
+
+
+</html>
+
+
+<!-- <div  class="navbar-collapse collapse flex-column"> -->
+<!-- <a class="nav-link active" href="#">Active</a>
+                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
+<!-- <div class="list-group">
+                        <li class="list-group-item ">Cras </li>
+                        <li class="list-group-item ">Cras </li>
+                    </div> -->
