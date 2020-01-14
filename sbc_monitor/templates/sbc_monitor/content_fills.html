@@ -47,21 +47,17 @@
     <caption style="caption-side: top;"><h5>Журнал подключений<h5></caption>
     <thead class="thead-light">
       <tr>
-        <th class="text-center">Дата подключения</th>
-        <th class="text-center">Дата выдачи адреса</th>
+        <th class="text-center">Дата</th>        
         <th class="text-center">Реальный адрес</th>
-        <th class="text-center">Виртуальный адрес</th>
-        <th class="text-center">Обновлено</th>
+        <th class="text-center">Виртуальный адрес</th>        
       </tr>
     </thead>
     <tbody>
     {% for log in log_client %}
       <tr>
-        <td class="text-center"> {{ log.connected_since|date:"d.m.Y H:i:s" }}</td>
-        <td class="text-center"> {{ log.last_ref|date:"d.m.Y H:i:s" }} </td>
+        <td class="text-center"> {{ log.date|date:"d.m.Y H:i:s" }}</td>        
         <td class="text-center"> {{ log.real_address }} </td>
         <td class="text-center"> {{ log.virtual_address }} </td>
-        <td class="text-center"> {{ log.updated|date:"d.m.Y H:i:s" }} </td>
       </tr>          
     {% endfor %}
     </tbody>
